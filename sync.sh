@@ -7,7 +7,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   git checkout .
   git pull
 ) || {
-  git clone https://github.com/chinnkarahoi/jd-scripts-docker.git /jd-scripts-docker_tmp
+  git clone https://github.com/orxvan/jd-scripts-docker.git /jd-scripts-docker_tmp
   [ -d /jd-scripts-docker_tmp ] && {
     rm -rf /jd-scripts-docker
     mv /jd-scripts-docker_tmp /jd-scripts-docker
@@ -40,7 +40,7 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   }
 }
 cd /scripts || exit 1
-cp -r /loon/* /scripts
+cp -r /loon/* /scripts/.
 npm install || npm install --registry=https://registry.npm.taobao.org || exit 1
 [ -f /crontab.list ] && {
   cp /crontab.list /crontab.list.old
