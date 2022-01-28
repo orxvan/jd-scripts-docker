@@ -19,19 +19,19 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
   cd /scripts
   git checkout .
   git pull
-# ) || {
-#   git clone --branch=master https://github.com/chinnkarahoi/jd_scripts.git /scripts_tmp
-#   [ -d /scripts_tmp ] && {
-#     rm -rf /scripts
-#     mv /scripts_tmp /scripts
-#   }
-# }
-# (
-#   exec 2<>/dev/null
-#   set -e
-#   cd /loon
-#   git checkout .
-#   git pull
+) || {
+  git clone --branch=master https://github.com/chinnkarahoi/jd_scripts.git /scripts_tmp
+  [ -d /scripts_tmp ] && {
+    rm -rf /scripts
+    mv /scripts_tmp /scripts
+  }
+}
+(
+  exec 2<>/dev/null
+  set -e
+  cd /loon
+  git checkout .
+  git pull
 ) || {
   git clone --branch=main https://github.com/chinnkarahoi/Loon.git /loon_tmp
   [ -d /loon_tmp ] && {
@@ -39,8 +39,8 @@ trap 'cp /jd-scripts-docker/sync.sh /sync' Exit
     mv /loon_tmp /loon
   }
 }
-# cd /scripts || exit 1
-mkdir /scripts
+cd /scripts || exit 1
+rm /scripts/*.js
 cp -r /loon/* /scripts/.
 npm install || npm install --registry=https://registry.npm.taobao.org || exit 1
 [ -f /crontab.list ] && {
